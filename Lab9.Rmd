@@ -4,7 +4,6 @@ title: |
   | Assignment 5 - Bonus
 author: |
   | Jonathan Zaslavsky
-  | 400130253
 date: "03/31/2021"
 output: html_document
 ---
