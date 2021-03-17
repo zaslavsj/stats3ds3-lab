@@ -2,15 +2,13 @@
 title: |
   | STATS 3DS3
   | Assignment 5 - Bonus
-author: |
-  | Jonathan Zaslavsky
+author: "Jonathan Zaslavsky"
 date: "03/31/2021"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(learnr)
 library(GGally)
 library(kableExtra)
 library(nnet)
@@ -23,7 +21,9 @@ library(pgmm) # coffee data
 
 ## Neural networks (seeds data)
 
-```{r seeds1, exercise = TRUE}
+Seeds data description: Measurements of geometrical properties of kernels belonging to three different varieties of wheat. A soft X-ray technique and GRAINS package were used to construct all seven, real-valued attributes.
+
+```{r}
 seeds <- read.table(
   "https://archive.ics.uci.edu/ml/machine-learning-databases/00236/seeds_dataset.txt"
   )
@@ -40,7 +40,7 @@ summary(seeds)
 cor(dplyr::select(seeds, -Class))
 
 
-dim(seeds)
+dim(seeds) # Shows dimensions of seeds dataset
 knitr::kable(head(seeds)) %>%
   kable_styling(latex_options="scale_down")
 
@@ -96,7 +96,9 @@ tab_seeds <- table(slice(
 
 ## Neural networks (Boston data - quantitative response)
 
-```{r Boston2, exercise = TRUE, exercise.setup = c("Boston1")}
+Boston data description: A data from with the housing values in 506 suburbs of Boston based on 14 variables.
+
+```{r}
 # Create training/testing sets
 train_Boston <- sample(
   1:nrow(Boston), 
@@ -138,7 +140,9 @@ mean((test_medv - nn_pred)^2)
 
 ## Neural networks (iris data)
 
-```{r i-cv1, exercise = TRUE}
+Iris data description: Measurements (cm) of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris: _Iris setosa_, _versicolor_, and _virginica_.
+
+```{r}
 ## Cross-validation for iris data
 set.seed(1)
 
@@ -252,10 +256,13 @@ tab
 
 ## Clustering (coffee data)
 
-```{r c-1, exercise = TRUE}
+Coffee data description: Data on the chemical composition of coffee samples collected from around the world, comprising 43 samples from 29 countries.
+
+```{r}
 data("coffee")
 set.seed(1)
 
+# Exclude first two columns of the dataset
 x <- dplyr::select(coffee, - Variety, - Country) 
 x_scaled <- scale(x)
 kmeans_coffee <- kmeans(x_scaled, 2)
@@ -338,7 +345,9 @@ ggplot(tibble(K = 2:8, avgSil = avgSil), aes(x = K, y = avgSil)) +
 
 ## Clustering (votes data)
 
-```{r eval=FALSE}
+Votes data description: A data frame with the percents of votes given to the republican candidate in presidential elections from 1856 to 1976. Rows represent the 50 states, and columns the 31 elections.
+
+```{r}
 data(votes.repub) # From cluster package
 votes.repub_scaled <- scale(votes.repub)
 #votes.repub_kmeans <- kmeans(votes.repub_scaled, 2)
